@@ -7,7 +7,7 @@ To run this app or produce an apk, follow the steps -
 	npm install
 	npm run build
 </pre>
-* Assuming you have cordova, create a cordova project and move the tlanni/dist folder contents to {cordova project name}/www folder
+* Assuming you have cordova, create a cordova project and move the *_tlanni/dist_* folder contents to *_{cordova project name}/www_* folder
 * Assuming you have androidSDK, gradle, and java jdk installed
 <pre>
 	cordova build android	
