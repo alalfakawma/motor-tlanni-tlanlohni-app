@@ -73,6 +73,8 @@ document.addEventListener('deviceready', function() {
 		} else if (tlanni.$children[0].$children[0].modalOpen) {
 			tlanni.$children[0].$children[0].modalOpen = false;
 			tlanni.$children[0].$children[0].clearInput();
+		} else {
+			navigator.app.exitApp();
 		}
 	}, false);
 });
