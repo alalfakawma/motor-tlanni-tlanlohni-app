@@ -7,14 +7,26 @@ window.tlanni = new Vue({
   render: h => h(App)
 }).$mount('#app')
 
+// Get the options
+const options = JSON.parse(localStorage.getItem('options'));
+
 window.checkMotorTlanni = function() {
 	let tlanlohni = [];
 	const date = new Date();
 
 	if (localStorage.getItem('vehicles')) {
 		const vehicles = JSON.parse(localStorage.getItem('vehicles'));
+		let theDate = (date.getDate().toString() > 1) ? (date.getDate() % 10) : date.getDate();
 		vehicles.forEach(v => {
-			if (((date.getDate().toString() > 1) ? (date.getDate() % 10) : date.getDate()) == (v.number % 10)) {
+			if (date.getHours() > options.notificationsTime) {
+				// Display data for tomorrow as there is no more time
+				if (theDate == 9) {
+					theDate = 0;
+				} else {
+					theDate = theDate + 1;
+				}
+			}
+			if (theDate == (v.number % 10)) {
 				// Motor tlanni
 				tlanlohni.push(v);
 			}
@@ -40,8 +52,6 @@ window.parseToString = function(v) {
 document.addEventListener('deviceready', function() {
 	tlanni.$children[0].deviceReady = true;
 
-	const options = JSON.parse(localStorage.getItem('options'));
-
 	cordova.plugins.notification.local.isPresent(0, function(present) {
 		if (!present && options.notifications) {
 			// If notification not present
@@ -49,7 +59,7 @@ document.addEventListener('deviceready', function() {
 				id: 0,
 			    title: (checkMotorTlanni().length > 0) ? checkMotorTlanni().length + " tlanlohni" : "Tlanni",
 			    text: (checkMotorTlanni().length > 0) ? parseToString(checkMotorTlanni()) : "I motor zawng zawng an tlan thei vek e",
-			    smallIcon: 'res://icon.png',
+			    smallIcon: 'file://icon.png',
 			    trigger: { every: { hour: parseFloat(options.notificationsTime), minute: 0 }, count: 1 },
 			});	
 		}

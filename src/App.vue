@@ -166,7 +166,7 @@ export default {
                   id: 0,
                   title: (checkMotorTlanni().length > 0) ? checkMotorTlanni().length + " tlanlohni" : "Tlanni",
                   text: (checkMotorTlanni().length > 0) ? parseToString(checkMotorTlanni()) : "I motor zawng zawng an tlan thei vek e",
-                  smallIcon: 'res://icon.png',
+                  smallIcon: 'file://icon.png',
                   trigger: { every: { hour: parseFloat(self.options.notificationsTime), minute: 0 }, count: 1 },
               });
             } else if (present && self.options.notifications) {
@@ -180,7 +180,7 @@ export default {
                         id: 0,
                         title: (checkMotorTlanni().length > 0) ? checkMotorTlanni().length + " tlanlohni" : "Tlanni",
                         text: (checkMotorTlanni().length > 0) ? parseToString(checkMotorTlanni()) : "I motor zawng zawng an tlan thei vek e",
-                        smallIcon: 'res://icon.png',
+                        smallIcon: 'file://icon.png',
                         trigger: { every: { hour: parseFloat(self.options.notificationsTime), minute: 0 }, count: 1 },
                     });
                   }
